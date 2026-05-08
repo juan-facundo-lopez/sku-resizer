@@ -1,6 +1,8 @@
 SKU-Resizer
 Automation for E-commerce Workflows
 
+Live demo https://sku-resizer-facundo.streamlit.app/
+
 Stop wasting time on manual image formatting. SKU-Resizer is a streamlined tool designed to bridge the gap between Design and E-commerce teams by automating image adaptation for product listings.
 
 💡 The Problem vs. The Solution
