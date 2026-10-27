@@ -115,7 +115,20 @@ st.markdown(
         box-shadow: 0 0 14px #54d89a;
     }
 
-    .hero { max-width: 960px; margin-bottom: 2.2rem; }
+    .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(340px, .75fr);
+        align-items: stretch;
+        gap: 2.2rem;
+        margin-bottom: 2.2rem;
+    }
+
+    .hero-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 300px;
+    }
 
     .eyebrow {
         display: inline-flex;
@@ -137,10 +150,10 @@ st.markdown(
     }
 
     .hero h1 {
-        max-width: 900px;
+        max-width: 780px;
         margin: 0;
         font-family: "Manrope", sans-serif;
-        font-size: clamp(3rem, 6vw, 6.4rem);
+        font-size: clamp(3rem, 5.2vw, 5.7rem);
         font-weight: 400;
         line-height: .96;
         letter-spacing: -.065em;
@@ -155,6 +168,130 @@ st.markdown(
         color: #9aa4c6;
         font-size: 1.03rem;
         line-height: 1.7;
+    }
+
+    .hero-visual {
+        position: relative;
+        overflow: hidden;
+        min-height: 300px;
+        padding: 1rem;
+        border: 1px solid rgba(125, 151, 255, .18);
+        border-radius: 28px;
+        background:
+            radial-gradient(circle at 75% 18%, rgba(91, 131, 255, .28), transparent 34%),
+            linear-gradient(145deg, rgba(24, 36, 75, .92), rgba(10, 17, 39, .92));
+        box-shadow: 0 28px 75px rgba(0,0,0,.27), inset 0 1px rgba(255,255,255,.05);
+    }
+
+    .hero-visual::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: .22;
+        background-image:
+            linear-gradient(rgba(132,157,255,.12) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(132,157,255,.12) 1px, transparent 1px);
+        background-size: 28px 28px;
+    }
+
+    .visual-top, .visual-footer {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .visual-top {
+        color: #99a9da;
+        font-size: .66rem;
+        font-weight: 700;
+        letter-spacing: .13em;
+        text-transform: uppercase;
+    }
+
+    .visual-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        padding: .45rem .62rem;
+        border: 1px solid rgba(121, 150, 255, .18);
+        border-radius: 999px;
+        color: #cbd5fa;
+        background: rgba(26, 39, 79, .72);
+        letter-spacing: 0;
+        text-transform: none;
+        font-weight: 500;
+    }
+
+    .visual-pill::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #76e6af;
+        box-shadow: 0 0 12px #54d89a;
+    }
+
+    .mock-canvas {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        width: 78%;
+        aspect-ratio: 4 / 3;
+        margin: 1rem auto .65rem;
+        overflow: hidden;
+        border: 1px solid rgba(140, 163, 255, .2);
+        border-radius: 18px;
+        background:
+            radial-gradient(circle at 50% 45%, rgba(100, 139, 255, .24), transparent 35%),
+            linear-gradient(145deg, rgba(8,14,33,.7), rgba(27,41,83,.78));
+        box-shadow: 0 18px 45px rgba(0,0,0,.3), inset 0 1px rgba(255,255,255,.04);
+    }
+
+    .product-shape {
+        width: 39%;
+        aspect-ratio: 1;
+        border-radius: 32% 68% 57% 43% / 45% 35% 65% 55%;
+        background: linear-gradient(145deg, #80a1ff, #315fe0 58%, #142d78);
+        box-shadow:
+            0 28px 45px rgba(26, 61, 167, .48),
+            inset 10px 12px 20px rgba(255,255,255,.18),
+            inset -12px -18px 28px rgba(0,0,0,.28);
+        animation: float 5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(3px) rotate(-5deg); }
+        50% { transform: translateY(-6px) rotate(3deg); }
+    }
+
+    .scan-line {
+        position: absolute;
+        left: 9%;
+        right: 9%;
+        top: 28%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(127, 163, 255, .9), transparent);
+        box-shadow: 0 0 14px rgba(92, 132, 255, .7);
+        animation: scan 3.8s ease-in-out infinite;
+    }
+
+    @keyframes scan {
+        0%, 100% { top: 24%; opacity: .3; }
+        50% { top: 76%; opacity: 1; }
+    }
+
+    .visual-footer {
+        color: #7280a9;
+        font-size: .65rem;
+    }
+
+    .visual-size {
+        color: #d8e0ff;
+        font-family: "Manrope", sans-serif;
+        font-size: 1rem;
     }
 
     .section-kicker {
@@ -278,8 +415,11 @@ st.markdown(
 
     [data-testid="stFileUploader"] > label { display: none; }
 
-    [data-testid="stFileUploadDropzone"] {
-        min-height: 235px;
+    [data-testid="stFileUploadDropzone"],
+    [data-testid="stFileUploaderDropzone"] {
+        display: flex;
+        align-items: center;
+        min-height: 180px;
         border: 1px dashed rgba(111, 143, 255, .48);
         border-radius: 18px;
         background:
@@ -288,15 +428,18 @@ st.markdown(
         transition: .25s ease;
     }
 
-    [data-testid="stFileUploadDropzone"]:hover {
+    [data-testid="stFileUploadDropzone"]:hover,
+    [data-testid="stFileUploaderDropzone"]:hover {
         border-color: #769aff;
         background-color: rgba(33, 49, 95, .68);
         transform: translateY(-1px);
     }
 
-    [data-testid="stFileUploadDropzone"] svg { color: #7397ff; width: 42px; height: 42px; }
+    [data-testid="stFileUploadDropzone"] svg,
+    [data-testid="stFileUploaderDropzone"] svg { color: #7397ff; width: 42px; height: 42px; }
 
-    [data-testid="stFileUploadDropzone"] button {
+    [data-testid="stFileUploadDropzone"] button,
+    [data-testid="stFileUploaderDropzone"] button {
         color: #eaf0ff !important;
         border: 1px solid rgba(121, 151, 255, .3) !important;
         border-radius: 12px !important;
@@ -404,12 +547,59 @@ st.markdown(
 
     .tiny-note { margin-top: .8rem; color: #596587; font-size: .7rem; text-align: center; }
 
+    .capability-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: .8rem;
+        margin-top: 1.1rem;
+    }
+
+    .capability {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        min-height: 68px;
+        padding: .85rem 1rem;
+        border: 1px solid rgba(126, 149, 233, .12);
+        border-radius: 17px;
+        background: rgba(17, 25, 53, .58);
+    }
+
+    .capability-icon {
+        display: grid;
+        place-items: center;
+        width: 32px;
+        height: 32px;
+        flex: 0 0 32px;
+        border-radius: 10px;
+        color: #a9bdff;
+        background: rgba(70, 107, 231, .18);
+        border: 1px solid rgba(105, 139, 255, .18);
+        font-size: .72rem;
+    }
+
+    .capability strong {
+        display: block;
+        color: #dce3ff;
+        font-size: .76rem;
+        font-weight: 600;
+    }
+
+    .capability small {
+        color: #6f7ba0;
+        font-size: .64rem;
+    }
+
     @media (max-width: 900px) {
         .block-container { padding: 1.2rem 1rem 3rem; }
         .topbar { padding-bottom: 2rem; }
         .top-status { display: none; }
+        .hero { grid-template-columns: 1fr; }
+        .hero-copy { min-height: auto; }
         .hero h1 { font-size: 3.2rem; }
+        .hero-visual { min-height: 280px; }
         .metric-grid { grid-template-columns: 1fr; }
+        .capability-strip { grid-template-columns: 1fr 1fr; }
     }
     </style>
     """,
@@ -446,19 +636,35 @@ with st.sidebar:
     st.caption("Images are centered automatically. PNG and WEBP transparency is preserved.")
     if st.button("Clear workspace", use_container_width=True):
         clear_all()
-    st.markdown('<div class="tiny-note">VERSION 2.0 · IMAGE OPERATIONS</div>', unsafe_allow_html=True)
+    st.markdown('<div class="tiny-note">VERSION 2.1 · IMAGE OPERATIONS</div>', unsafe_allow_html=True)
 
 
 st.markdown(
-    """
+    f"""
     <div class="topbar">
         <div class="brand"><span class="brand-mark">◈</span> SKU Resizer</div>
         <div class="top-status"><span class="status-dot"></span> System ready</div>
     </div>
     <section class="hero">
-        <div class="eyebrow">Image operations</div>
-        <h1>Every SKU.<br><span>Perfectly framed.</span></h1>
-        <p>Resize, center and package product imagery in one clean workflow. Built for fast, consistent e-commerce uploads.</p>
+        <div class="hero-copy">
+            <div class="eyebrow">Image operations</div>
+            <h1>Every SKU.<br><span>Perfectly framed.</span></h1>
+            <p>Resize, center and package product imagery in one clean workflow. Built for fast, consistent e-commerce uploads.</p>
+        </div>
+        <div class="hero-visual">
+            <div class="visual-top">
+                <span>Smart canvas</span>
+                <span class="visual-pill">Ready</span>
+            </div>
+            <div class="mock-canvas">
+                <div class="product-shape"></div>
+                <div class="scan-line"></div>
+            </div>
+            <div class="visual-footer">
+                <span>ACTIVE PROFILE</span>
+                <span class="visual-size">{target_w} × {target_h} px</span>
+            </div>
+        </div>
     </section>
     """,
     unsafe_allow_html=True,
@@ -522,6 +728,31 @@ with info_col:
         """,
         unsafe_allow_html=True,
     )
+
+
+st.markdown(
+    """
+    <div class="capability-strip">
+        <div class="capability">
+            <span class="capability-icon">01</span>
+            <span><strong>Batch workflow</strong><small>Multiple files at once</small></span>
+        </div>
+        <div class="capability">
+            <span class="capability-icon">02</span>
+            <span><strong>Smart fit</strong><small>Centered without cropping</small></span>
+        </div>
+        <div class="capability">
+            <span class="capability-icon">03</span>
+            <span><strong>Transparent-safe</strong><small>PNG and WEBP preserved</small></span>
+        </div>
+        <div class="capability">
+            <span class="capability-icon">04</span>
+            <span><strong>One-click delivery</strong><small>Everything in one ZIP</small></span>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 
 if process_clicked:
