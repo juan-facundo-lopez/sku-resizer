@@ -116,18 +116,15 @@ st.markdown(
     }
 
     .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(340px, .75fr);
-        align-items: stretch;
-        gap: 2.2rem;
-        margin-bottom: 2.2rem;
+        display: block;
+        margin: 2.2rem 0 3.25rem;
     }
 
     .hero-copy {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        min-height: 300px;
+        min-height: 320px;
     }
 
     .eyebrow {
@@ -150,10 +147,10 @@ st.markdown(
     }
 
     .hero h1 {
-        max-width: 780px;
+        max-width: 900px;
         margin: 0;
         font-family: "Manrope", sans-serif;
-        font-size: clamp(3rem, 5.2vw, 5.7rem);
+        font-size: clamp(3rem, 5.5vw, 6.15rem);
         font-weight: 400;
         line-height: .96;
         letter-spacing: -.065em;
@@ -168,6 +165,17 @@ st.markdown(
         color: #9aa4c6;
         font-size: 1.03rem;
         line-height: 1.7;
+    }
+
+    .dashboard-panel {
+        margin-top: 2.2rem;
+        padding: 1.35rem;
+        border: 1px solid rgba(125, 151, 255, .13);
+        border-radius: 27px;
+        background:
+            radial-gradient(circle at 92% 4%, rgba(72, 108, 224, .13), transparent 31%),
+            linear-gradient(145deg, rgba(12, 19, 42, .72), rgba(8, 13, 29, .62));
+        box-shadow: 0 28px 70px rgba(0,0,0,.2), inset 0 1px rgba(255,255,255,.025);
     }
 
     .hero-visual {
@@ -419,7 +427,7 @@ st.markdown(
     [data-testid="stFileUploaderDropzone"] {
         display: flex;
         align-items: center;
-        min-height: 180px;
+        min-height: 225px;
         border: 1px dashed rgba(111, 143, 255, .48);
         border-radius: 18px;
         background:
@@ -594,10 +602,9 @@ st.markdown(
         .block-container { padding: 1.2rem 1rem 3rem; }
         .topbar { padding-bottom: 2rem; }
         .top-status { display: none; }
-        .hero { grid-template-columns: 1fr; }
         .hero-copy { min-height: auto; }
         .hero h1 { font-size: 3.2rem; }
-        .hero-visual { min-height: 280px; }
+        .dashboard-panel { margin-top: 0; }
         .metric-grid { grid-template-columns: 1fr; }
         .capability-strip { grid-template-columns: 1fr 1fr; }
     }
@@ -636,36 +643,15 @@ with st.sidebar:
     st.caption("Images are centered automatically. PNG and WEBP transparency is preserved.")
     if st.button("Clear workspace", use_container_width=True):
         clear_all()
-    st.markdown('<div class="tiny-note">VERSION 2.1 · IMAGE OPERATIONS</div>', unsafe_allow_html=True)
+    st.markdown('<div class="tiny-note">VERSION 2.2 · IMAGE OPERATIONS</div>', unsafe_allow_html=True)
 
 
 st.markdown(
-    f"""
+    """
     <div class="topbar">
         <div class="brand"><span class="brand-mark">◈</span> SKU Resizer</div>
         <div class="top-status"><span class="status-dot"></span> System ready</div>
     </div>
-    <section class="hero">
-        <div class="hero-copy">
-            <div class="eyebrow">Image operations</div>
-            <h1>Every SKU.<br><span>Perfectly framed.</span></h1>
-            <p>Resize, center and package product imagery in one clean workflow. Built for fast, consistent e-commerce uploads.</p>
-        </div>
-        <div class="hero-visual">
-            <div class="visual-top">
-                <span>Smart canvas</span>
-                <span class="visual-pill">Ready</span>
-            </div>
-            <div class="mock-canvas">
-                <div class="product-shape"></div>
-                <div class="scan-line"></div>
-            </div>
-            <div class="visual-footer">
-                <span>ACTIVE PROFILE</span>
-                <span class="visual-size">{target_w} × {target_h} px</span>
-            </div>
-        </div>
-    </section>
     """,
     unsafe_allow_html=True,
 )
@@ -676,6 +662,13 @@ upload_col, info_col = st.columns([1.7, 1], gap="large")
 with upload_col:
     st.markdown(
         """
+        <section class="hero">
+            <div class="hero-copy">
+                <div class="eyebrow">Image operations</div>
+                <h1>Every SKU.<br><span>Perfectly framed.</span></h1>
+                <p>Resize, center and package product imagery in one clean workflow. Built for fast, consistent e-commerce uploads.</p>
+            </div>
+        </section>
         <div class="section-kicker">01 · Input</div>
         <div class="section-title">Drop your product images</div>
         <div class="section-copy">PNG, JPG, JPEG or WEBP · Multiple files supported</div>
@@ -700,6 +693,7 @@ with upload_col:
 with info_col:
     st.markdown(
         f"""
+        <div class="dashboard-panel">
         <div class="section-kicker">02 · Live profile</div>
         <div class="section-title">Output overview</div>
         <div class="section-copy">Your current export configuration</div>
@@ -725,34 +719,10 @@ with info_col:
             <div class="workflow-step"><span class="step-number">02</span> Automatic resize + center</div>
             <div class="workflow-step"><span class="step-number">03</span> Download one clean ZIP</div>
         </div>
+        </div>
         """,
         unsafe_allow_html=True,
     )
-
-
-st.markdown(
-    """
-    <div class="capability-strip">
-        <div class="capability">
-            <span class="capability-icon">01</span>
-            <span><strong>Batch workflow</strong><small>Multiple files at once</small></span>
-        </div>
-        <div class="capability">
-            <span class="capability-icon">02</span>
-            <span><strong>Smart fit</strong><small>Centered without cropping</small></span>
-        </div>
-        <div class="capability">
-            <span class="capability-icon">03</span>
-            <span><strong>Transparent-safe</strong><small>PNG and WEBP preserved</small></span>
-        </div>
-        <div class="capability">
-            <span class="capability-icon">04</span>
-            <span><strong>One-click delivery</strong><small>Everything in one ZIP</small></span>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
 
 
 if process_clicked:
